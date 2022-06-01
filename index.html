@@ -129,7 +129,7 @@
 
     <div id="search-bar">
         <form action="https://www.google.com/search?" method="get" target="_blank">
-            <input type="text" name="q" placeholder="Search Google" />
+            <input type="text" id="ti" name="q" placeholder="Search Google" />
             <input type="submit" value="Search" />
         </form>
     </div>
@@ -158,6 +158,10 @@
         </a>
     </div>
     <script>
+        let input = document.getElementById('ti');
+        input.focus();
+        input.select();
+        
         let darkModeToggle = localStorage.getItem("darkMode");
         const darkModeCheckbox = document.getElementById("checko");
         if (darkModeToggle == "enabled") {
