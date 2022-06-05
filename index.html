@@ -20,6 +20,9 @@
             /* font family */
             font-family: "나눔스퀘어라운드 Regular";
         }
+        #todo{
+            font-size: 100%;
+        }
         #search-bar {
             position: absolute;
             top: 55%;
@@ -156,7 +159,24 @@
             <img height="64" width="64" src='bootstrap.png' />
         </a>
     </div>
+    <div id="todo" style="margin-top: 20vh;">
+        <div style="text-align: left    ;">
+            To do : <button style="border-radius: 10px;" onclick=newTodo()>➕</button></div>
+        <ul id="todo-list" style="margin: 0; text-align: left;">
+            <li>
+                chicky! <button style="border-radius: 10px;" onclick="removeTodo(this)">❌</button>
+            </li>
+        </ul>
+    </div>
     <script>
+        let todoList = document.getElementById("todo-list");
+        let todoLocal = localStorage.getItem("todo");
+        if(todoList == null || todoList == "" || todoList == "undefined"){
+            todoList.innerHTML = '<li>chicky! <button style="border-radius: 10px;" onclick="removeTodo(this)">❌</button></li>';
+        }else{
+            todoList.innerHTML = todoLocal;
+        }
+        todoList.innerHTML = localStorage.getItem("todo");
         let input = document.getElementById('textBoxSearch');
         input.focus();
         input.select();
@@ -183,6 +203,22 @@
             
         }
         
+        function newTodo(){
+            let newTodo = prompt('Add To do Name');
+            if (newTodo == null || newTodo == "" || newTodo == "undefined"){
+                
+            }else{
+                todoList.innerHTML += '<li>' + newTodo + '<button style="border-radius: 10px;" onclick="removeTodo(this)">❌</button></li>';
+                localStorage.setItem("todo", todoList.innerHTML);
+            }
+        }
+
+        function removeTodo(el){
+            let element = el;
+            element.parentNode.remove();
+            localStorage.setItem("todo", todoList.innerHTML);
+        }
+
         function pad(d) {
             return (d < 10) ? '0' + d.toString() : d.toString();
         }
